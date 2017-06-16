@@ -100,9 +100,7 @@ class CurveFitting extends JFrame
 			
 			if(event.getSource()==button)//event is obj of listner. if button pressed then:
 			{
-				
-				//n = Integer.parseInt(field.getText().toString());//number of known points.
-				
+				// Input of datapoints. JOptionPane simply creates a dialig for input.
 				while(i<n)
 				{
 					X = JOptionPane.showInputDialog("Enter x" + ++i).toString();
@@ -110,11 +108,19 @@ class CurveFitting extends JFrame
 					Y = JOptionPane.showInputDialog("Enter y" + i).toString();
 					y[i-1] = Double.parseDouble(Y);	
 				}
-				//d_error_m = -2 SUM(i=1 to n, xi*(yi-m*xi-c));
-				//d_error_c = -2 SUM(i=1 to n, (yi-m*xi-c));
+				/*
+				Our final equation is in the form of y=mx+c. We have two unknowns, so we need two equations
+				to solve for m and c. These equations are obtained by taking partial derivative of error
+				wrt m and c and equated to 0 to get correspoding m and c for minimum error.
 				
+				This gives us two equations:
 				
-				// Calculating summation for above equation
+				d_error_m = -2 SUM(i=1 to n, xi*(yi-m*xi-c));
+				d_error_c = -2 SUM(i=1 to n, (yi-m*xi-c));
+				
+				These equations are rearranged to get m and c. Equation at line 132 and 133.
+				*/
+				// Calculating summation terms for below equation
 				for(int j = 0; j < n; j++)
 				{
 					sumx += x[j];
@@ -126,6 +132,7 @@ class CurveFitting extends JFrame
 				m = ((sumy/n) - sumxy)/((sumx/n) - sumx_sq);
 				c = (sumy - m*sumx)/n;
 				
+				// y = mx + c (duh)
 				JOptionPane.showMessageDialog(null, "f(x) = " + m + "x + " + c , "The Required Equation", JOptionPane.PLAIN_MESSAGE);
 
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
