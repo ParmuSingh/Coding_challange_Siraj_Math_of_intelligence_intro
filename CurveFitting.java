@@ -1,17 +1,19 @@
+/*
+THIS IS FOR SIRAJ.
+Jump to line 90, actionPerformed() of EventClass for main algo used to find line's equation.
+*/
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
 class CurveFitting extends JFrame
 {
-	
-	//private static JPanel panel;
-	//private JPanel panel1;
 	private JLabel text;
 	private JTextField field;
 	private JButton button;
-	public int n;//functions to be made
-	public double x[]/*= new double[n]*/, y[]/* = new double[n]*/;
+	public int n;
+	public double x[], y[];
 	private Graph frame = new Graph("Graph");
 	private float m, c;
 	
@@ -28,27 +30,22 @@ class CurveFitting extends JFrame
 	        Graphics2D g2d = (Graphics2D) g;
 	        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 	        
-	        //object.removeAll();
 	        int i = 0;
 	        g2d.setColor(Color.RED);
 	        g2d.drawLine(1375/2, 0, 1375/2, 730);
 	        g2d.drawLine(0, 730/2, 1375, 730/2);
 	        
-	        //`HERE`//
-	        //g2d.fillOval(110, 100, 30, 30);//here
-	        //^HERE^//
 	        g2d.setColor(Color.WHITE);
 	        while(i<n)//shows input points with the help of circle of r=10
 	        {
 	        g2d.fillOval((int)x[i] + (1375/2) - /*radius*/3, (730/2) - (int)y[i] - 3, 10, 10);
-	        //	g2d.fillOval(110, 100, 3, 3);
 	        i++;
 	        }
 	        g2d.setColor(Color.YELLOW);
 	        i=-500;
 	        while(i<500)//draws line with the help of consecutive ovals
 	        {
-	        	g2d.drawOval(i+ (1375/2) - 2, (730/2) - ((int)(m*i + c)) - 2, 3, 3);
+	        	g2d.drawOval(i+ (1375/2) - 2, (730/2) - ((int)(m*i + c)) - 2, 3, 3);//Drawing the line.
 	        	i++;
 	        }
 		}
@@ -65,7 +62,6 @@ class CurveFitting extends JFrame
 	
 	public CurveFitting()//constructor where all codes for the window are written
 	{
-		//panel = new JPanel();
 		setLayout(new FlowLayout());//layout like a text:one after another
 		text = new JLabel("Please Enter The Number Points Known: ");
 		add(text);//add to frame
@@ -73,19 +69,14 @@ class CurveFitting extends JFrame
 		add(field);
 		button = new JButton("Enter");
 		add(button);
-		
-		//remove(button);
-		//add(panel);
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(300, 300);
 		setResizable(false);
 		setVisible(true);
 		
-		
 		EventClass eventObject = new EventClass();
 		button.addActionListener(eventObject);
-		
-		
 	}
 	
 	
@@ -107,9 +98,6 @@ class CurveFitting extends JFrame
 			String X, Y;
 			int i = 0;
 			
-			
-			//double x[] = new double[n], y[] = new double[n];
-			
 			if(event.getSource()==button)//event is obj of listner. if button pressed then:
 			{
 				
@@ -125,6 +113,8 @@ class CurveFitting extends JFrame
 				//d_error_m = -2 SUM(i=1 to n, xi*(yi-m*xi-c));
 				//d_error_c = -2 SUM(i=1 to n, (yi-m*xi-c));
 				
+				
+				// Calculating summation for above equation
 				for(int j = 0; j < n; j++)
 				{
 					sumx += x[j];
@@ -137,26 +127,11 @@ class CurveFitting extends JFrame
 				c = (sumy - m*sumx)/n;
 				
 				JOptionPane.showMessageDialog(null, "f(x) = " + m + "x + " + c , "The Required Equation", JOptionPane.PLAIN_MESSAGE);
-				//Thread.sleep(4000);
+
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 				frame.setSize(1370, 730);
 				frame.getContentPane().setBackground(Color.BLACK);
-				//clear = true;
-				//repaint();
-				//remove(button);
-				//remove(field);
-				//remove(text);
-				//Graph graphObject = new Graph(m, c);
-				/*
-				graphObject.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				graphObject.setSize(1370, 730);
-				graphObject.setResizable(false);
-				graphObject.setVisible(true);
-				*/
-				
-				//panel1 = new JPanel();
-				//add(panel1);
 			}
 			 
 			}
